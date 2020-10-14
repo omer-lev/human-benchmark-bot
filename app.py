@@ -5,11 +5,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
-import pyautogui
 import uuid
 
 
-PATH = "C:\Program Files (x86)\chromedriver.exe"
+PATH = "PATH TO YOUR CHROME DRIVER"
 driver = webdriver.Chrome(PATH)
 
 driver.get("https://humanbenchmark.com/tests/reactiontime")
@@ -26,7 +25,7 @@ while True:
         if num < 4:
             score = (driver.find_element_by_css_selector("h1 div").get_attribute("innerHTML")).replace("ms", "")
 
-            if int(score) < 30:
+            if int(score) < 20:
                 driver.save_screenshot("C:\humanbenchmark\{} -- {}.png".format(score, uuid.uuid4()))
 
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "view-result"))).click()
@@ -34,7 +33,7 @@ while True:
         elif num == 4:
             score = (driver.find_element_by_css_selector("h1").get_attribute("innerHTML")).replace("ms", "")
 
-            if int(score) < 30:
+            if int(score) < 20:
                 driver.save_screenshot("C:\humanbenchmark\{} -- {}.png".format(score, uuid.uuid4()))
             
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "secondary"))).click()
